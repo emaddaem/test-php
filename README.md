@@ -3,7 +3,7 @@
 A modern contact form built with Laravel and React, featuring real-time validation and responsive design.
 
 ## Screenshot
-![Contact Form Demo](src\laravel-app\public\images\final-result.png)
+![Contact Form Demo](src/laravel-app/public/images/final-result.png)
 
 ## Technologies Used
 
