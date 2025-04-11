@@ -1,40 +1,122 @@
-# Test web Majordhom
+# Contact Form Demo
 
-## Pré-requis
+A modern contact form built with Laravel and React, featuring real-time validation and responsive design.
 
-git, docker, et un IDE
+## Screenshot
+![Contact Form Demo](src\laravel-app\public\images\final-result.png)
 
-## Démarrer
+## Technologies Used
 
-Cloner le repo github
-> git clone https://github.com/Majordhom/test-php.git
+- **Frontend:**
+  - React
+  - Inertia.js
+  - Tailwind CSS
+  - ES6+
 
-Lancer la stack LAMP
-> docker compose up -d
+- **Backend:**
+  - Laravel
+  - PHP 8.3
+  - MySQL 8.0
 
-Apache est ouvert sur le port :80 (http://localhost:80).\
-Phpmyadmin est ouvert sur le port :8080 (http://localhost:8080)\
-Mysql est ouvert sur :3306\
-\
-Utilisateur et mdp mysql: `root` et `verysecurepassword`
+- **Development Environment:**
+  - Docker
+  - Docker Compose
+  - PHP MyAdmin
 
-## Exercice
+## Prerequisites
 
-*Pas de limite de temps, vous pourrez terminer l'exercice chez vous si cela vous semble pertinent.*
+- Docker Desktop
+- Git
+- IDE
 
-![alt text](./maquette.png)
+## Installation
 
-Vous devez intégrer cette maquette au site web de l'agence, enregistrez les données du formulaire dans la base de
-données.
-Nous voulons voir votre façon d'intégrer une maquette de manière *responsive*, comment vous organisez votre code (split des fichiers, commentaires, balises html, écriture des fonctions ...), et
-comment vous
-gérez la sécurité de celui-ci.
+1. Clone the repository:
+```bash
+git clone https://github.com/emaddaem/test-php.git
+cd test-php
+```
 
-Le but n'est pas forcement de terminer la maquette et de tout intégrer, mais de montrer ce que vous savez faire:
-connaissance d'un framework
-(SASS, React, Angular, Typescript, Laravel, Symfony ...) ou autres outils (Google ReCaptcha), design pattern, etc.
+2. Create environment files:
+```bash
+# Create Laravel .env
+cp src/laravel-app/.env.example src/laravel-app/.env
 
-Ne vous inquiètez ne vous jugerons pas uniquement sur ce test, vous pourrez aussi nous faire parvenir par exemple le
-code source de vos projets d'études ou projets perso.
+# Create Docker .env
+cp .env.example .env
+```
 
-Bonne chance !
+3. Configure environment variables:
+```properties
+# .env
+DB_DATABASE=testdb
+DB_USERNAME=root
+DB_PASSWORD=verysecurepassword
+```
+
+4. Start Docker containers:
+```bash
+docker compose up -d
+```
+
+5. Install dependencies:
+```bash
+# Install PHP dependencies
+docker compose exec apache composer install
+
+# Install Node.js dependencies
+docker compose exec apache npm install
+
+# Build assets
+docker compose exec apache npm run build
+```
+
+6. Set up Laravel:
+```bash
+# Generate application key
+docker compose exec apache php artisan key:generate
+
+# Run migrations
+docker compose exec apache php artisan migrate
+```
+
+## Usage
+
+Access the application:
+- Web application: http://localhost:8000
+- PHP MyAdmin: http://localhost:8080
+  - Username: root
+  - Password: (as set in .env)
+
+## Development
+
+To work on the project:
+```bash
+docker compose exec apache npm run dev
+```
+
+## Docker Services
+
+- **Apache + PHP**: `:8000` - Web server
+- **MySQL**: `:3306` - Database
+- **PHPMyAdmin**: `:8080` - Database management
+
+## Project Structure
+
+```
+src/laravel-app/
+├── resources/
+│   ├── js/
+│   │   ├── Components/
+│   │   │   └── Contact/      # Contact form components
+│   │   └── Pages/           # Inertia pages
+│   └── css/
+├── routes/
+│   └── web.php              # Application routes
+├── app/
+│   ├── Http/
+│   │   └── Controllers/     # Controllers
+│   └── Models/              # Database models
+└── database/
+    └── migrations/          # Database migrations
+```
